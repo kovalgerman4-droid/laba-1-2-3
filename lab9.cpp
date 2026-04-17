@@ -20,7 +20,7 @@ struct Node{
 
 Node<int>* insert_at_head(Node<int>* head, int value){
     Node<int>* new_head = new Node<int>(value, head);
-    return nullptr;
+    return new Node<int>(value, head);
 }
 template<typename T, typename iter, typename F>
 Node<T>* build_list(iter& it, iter& end, F f){
