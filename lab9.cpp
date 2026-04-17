@@ -63,9 +63,11 @@ int main(){
     auto head_end = head_vec.end();
     Node<int>* head = build_list<int, std::vector<std::string>::iterator, decltype([](auto s){ return std::stoi(s);})>(head_it, head_end, [](auto s){ return std::stoi(s);});
     int value;
+    std::cin >> value;
     ignore_line();
     Node<int>* res = insert_at_head(head, value);
     std::vector<std::string> rec_vec;
     format_list(res, [](auto v){return std::to_string(v);}, rec_vec);
     put_words(rec_vec);
+    delete res;
 }
