@@ -40,7 +40,7 @@ std::vector<T> get_words(){
     return v;
 }
 void ignore_line(){
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max());
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 template<typename T, typename F>
 void format_list(Node<T>* node, F f, std::vector<std::string>& out){
