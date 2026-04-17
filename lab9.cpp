@@ -26,7 +26,7 @@ Node<T>* build_list(iter& it, iter& end, F f){
     if(it == end)return nullptr;
     std::string val = *it;
     ++it;
-    Node<T>* next = build_list(it, end, f);
+    Node<T>* next = build_list<T, iter, F>(it, end, f);
     return new Node<T>{f(val), next};
 }
 template<typename T>
@@ -40,7 +40,7 @@ std::vector<T> get_words(){
     return v;
 }
 void ignore_line(){
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max());
 }
 template<typename T, typename F>
 void format_list(Node<T>* node, F f, std::vector<std::string>& out){
@@ -57,11 +57,15 @@ void put_words(const std::vector<T>& v){
     }
 }
 
+struct StringToInt {
+    int operator()(const std::string& s) const { return std::stoi(s); }
+};
+
 int main(){
     std::vector<std::string> head_vec = get_words<std::string>();
     auto head_it = head_vec.begin();
     auto head_end = head_vec.end();
-    Node<int>* head = build_list<int, std::vector<std::string>::iterator, decltype([](auto s){ return std::stoi(s);})>(head_it, head_end, [](auto s){ return std::stoi(s);});
+    Node<int>* head = build_list<int, std::vector<std::string>::iterator, StringToInt>(head_it, head_end, StringToInt{});
     int value;
     std::cin >> value;
     ignore_line();
